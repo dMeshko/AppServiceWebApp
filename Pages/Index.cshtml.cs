@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AppServiceWebApp.Pages
 {
@@ -7,9 +6,14 @@ namespace AppServiceWebApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public string GreetMessage { get; private init; }
+
+        public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration)
         {
             _logger = logger;
+            //GreetMessage = configuration.GetValue<string?>("GreetMessage") ?? "wtf";
+            GreetMessage = configuration["GreetMessage"] ?? "wtff";
+
         }
 
         public void OnGet()
